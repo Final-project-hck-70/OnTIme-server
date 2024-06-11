@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Overtime extends Model {
     /**
@@ -11,16 +9,20 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Overtime.belongsTo(models.User, { foreignKey: "UserId" });
     }
   }
-  Overtime.init({
-    overtimeDate: DataTypes.DATE,
-    overtimeDuration: DataTypes.INTEGER,
-    overtimeStatus: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Overtime',
-  });
+  Overtime.init(
+    {
+      overtimeDate: DataTypes.DATE,
+      overtimeDuration: DataTypes.INTEGER,
+      overtimeStatus: DataTypes.STRING,
+      UserId: DataTypes.INTEGER,
+    },
+    {
+      sequelize,
+      modelName: "Overtime",
+    }
+  );
   return Overtime;
 };
