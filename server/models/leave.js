@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Leave extends Model {
     /**
@@ -15,16 +13,53 @@ module.exports = (sequelize, DataTypes) => {
       Leave.belongsTo(models.User, { foreignKey: "DelegateUserId" });
     }
   }
-  Leave.init({
-    from: DataTypes.DATE,
-    to: DataTypes.DATE,
-    reason: DataTypes.STRING,
-    leaveStatus: DataTypes.STRING,
-    UserId: DataTypes.INTEGER,
-    DelegateUserId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Leave',
-  });
+  Leave.init(
+    {
+      from: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "From date is required" },
+        },
+      },
+      to: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "To date is required" },
+        },
+      },
+      reason: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Reason cannot be empty" },
+          notEmpty: { msg: "Reason cannot be empty" },
+        },
+      },
+      leaveStatus: {
+        type: DataTypes.STRING,
+        defaultValue: "Pending",
+      },
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "User ID is required" },
+        },
+      },
+      DelegateUserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "User ID is required" },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Leave",
+    }
+  );
   return Leave;
 };

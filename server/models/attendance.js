@@ -17,7 +17,13 @@ module.exports = (sequelize, DataTypes) => {
       clockIn: DataTypes.DATE,
       clockOut: DataTypes.DATE,
       attendanceStatus: DataTypes.STRING,
-      UserId: DataTypes.INTEGER,
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "User ID is required" },
+        },
+      },
     },
     {
       sequelize,

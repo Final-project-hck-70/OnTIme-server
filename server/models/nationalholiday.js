@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class NationalHoliday extends Model {
     /**
@@ -14,13 +12,34 @@ module.exports = (sequelize, DataTypes) => {
       NationalHoliday.belongsTo(models.User, { foreignKey: "UserId" });
     }
   }
-  NationalHoliday.init({
-    date: DataTypes.DATE,
-    holidayName: DataTypes.STRING,
-    UserId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'NationalHoliday',
-  });
+  NationalHoliday.init(
+    {
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Date is required" },
+        },
+      },
+      holidayName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Name is required" },
+        },
+      },
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "User ID is required" },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "NationalHoliday",
+    }
+  );
   return NationalHoliday;
 };

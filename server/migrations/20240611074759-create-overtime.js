@@ -17,6 +17,9 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
       },
+      overtimeReason: {
+        type: Sequelize.STRING,
+      },
       overtimeStatus: {
         type: Sequelize.STRING,
       },

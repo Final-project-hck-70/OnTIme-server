@@ -14,10 +14,38 @@ module.exports = (sequelize, DataTypes) => {
   }
   Overtime.init(
     {
-      overtimeDate: DataTypes.DATE,
-      overtimeDuration: DataTypes.INTEGER,
-      overtimeStatus: DataTypes.STRING,
-      UserId: DataTypes.INTEGER,
+      overtimeDate: {
+        type: DataTypes.DATE,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Overtime date is required" },
+        },
+      },
+      overtimeDuration: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Overtime duration is required" },
+        },
+      },
+      overtimeReason: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Reason is required" },
+        },
+      },
+      overtimeStatus: {
+        type: DataTypes.STRING,
+        defaultValue: "Pending",
+      },
+      UserId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "User ID is required" },
+        },
+      },
     },
     {
       sequelize,

@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const { hashPass } = require("../helpers/bcrypt");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -19,19 +20,84 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      name: DataTypes.STRING,
-      role: DataTypes.STRING,
-      email: DataTypes.STRING,
-      password: DataTypes.STRING,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Name is required",
+          },
+          notEmpty: {
+            msg: "Name is required",
+          },
+        },
+      },
+      role: {
+        type: DataTypes.STRING,
+        defaultValue: "staff",
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: {
+          args: true,
+          msg: "Email is already in use",
+        },
+        validate: {
+          notNull: {
+            msg: "Email is required",
+          },
+          notEmpty: {
+            msg: "Email is required",
+          },
+          isEmail: {
+            msg: "Email is not valid",
+          },
+        },
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Password is required",
+          },
+          notEmpty: "Password is required",
+          len: {
+            args: [5],
+            msg: "Password must be at least 5 characters long",
+          },
+        },
+      },
       phoneNumber: DataTypes.INTEGER,
       avaUrl: DataTypes.STRING,
-      position: DataTypes.STRING,
-      CompanyId: DataTypes.INTEGER,
+      position: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Position is required",
+          },
+          notEmpty: {
+            msg: "Position is required",
+          },
+        },
+      },
+      CompanyId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Company ID is required" },
+        },
+      },
     },
     {
       sequelize,
       modelName: "User",
     }
   );
+  User.beforeCreate((user) => {
+    user.password = hashPass(user.password);
+  });
   return User;
 };
