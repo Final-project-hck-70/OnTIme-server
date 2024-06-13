@@ -8,6 +8,10 @@ const overtimeRouter = require("./overtimeRouter");
 const UserController = require("../controllers/userController");
 const { adminOnly } = require("../middleware/authorization");
 
+router.get("/", (req, res, next) => {
+  res.json("API OnTime");
+});
+
 router.post("/login", UserController.postlogin);
 
 router.use(authentication);

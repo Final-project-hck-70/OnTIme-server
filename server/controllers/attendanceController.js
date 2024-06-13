@@ -31,11 +31,11 @@ class AttendanceController {
       }
 
       const clockInTime = new Date(user.Company.clockInTime);
-      const attendanceStatus = now > clockInTime ? "late" : "on time";
+      const attendanceStatus = new Date() > clockInTime ? "late" : "on time";
 
       const attendance = await Attendance.create({
         UserId,
-        clockIn: now,
+        clockIn: new Date(),
         attendanceStatus,
       });
 

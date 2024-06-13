@@ -10,7 +10,10 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Leave.belongsTo(models.User, { foreignKey: "UserId" });
-      Leave.belongsTo(models.User, { foreignKey: "DelegateUserId" });
+      Leave.belongsTo(models.User, {
+        foreignKey: "DelegateUserId",
+        as: "DelegateUser",
+      });
     }
   }
   Leave.init(
@@ -26,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
         validate: {
-          notNull: { msg: "To date is required" },
+          notNull: { msg: "To date is required" },  
         },
       },
       reason: {
