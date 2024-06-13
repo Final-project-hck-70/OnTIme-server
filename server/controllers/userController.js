@@ -1,5 +1,5 @@
 const { comparePass } = require("../helpers/bcrypt");
-const { User, Company } = require("../models");
+const { User, Company, Attendance, Overtime, Leave } = require("../models");
 const { createToken } = require("../helpers/jwt");
 const { Op, Sequelize } = require("sequelize");
 
