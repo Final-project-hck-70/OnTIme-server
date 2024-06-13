@@ -59,7 +59,7 @@ class OvertimeController {
       const overtimes = await Overtime.findAll({
         where: { UserId },
         include: [{ model: User, attributes: ["name", "email"] }],
-      });
+      }); 
 
       res.status(200).json(overtimes);
     } catch (error) {

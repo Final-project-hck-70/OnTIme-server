@@ -29,7 +29,7 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.DATE,
         allowNull: false,
         validate: {
-          notNull: { msg: "To date is required" },
+          notNull: { msg: "To date is required" },  
         },
       },
       reason: {
