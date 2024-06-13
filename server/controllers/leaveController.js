@@ -5,7 +5,7 @@ class LeaveController {
   static async createLeave(req, res, next) {
     try {
       const { from, to, reason, DelegateUserId } = req.body;
-      const UserId = req.user.id; 
+      const UserId = req.user.id;
 
       const leave = await Leave.create({
         from,
@@ -29,11 +29,11 @@ class LeaveController {
       const where = {};
       if (month && year) {
         where.from = Sequelize.where(
-          Sequelize.fn('date_part', 'month', Sequelize.col('from')),
+          Sequelize.fn("date_part", "month", Sequelize.col("from")),
           month
         );
         where.to = Sequelize.where(
-          Sequelize.fn('date_part', 'year', Sequelize.col('to')),
+          Sequelize.fn("date_part", "year", Sequelize.col("to")),
           year
         );
       }
@@ -41,8 +41,8 @@ class LeaveController {
       const leaves = await Leave.findAll({
         where,
         include: [
-          { model: User, as: 'User', attributes: ['name', 'email'] },
-          { model: User, as: 'DelegateUser', attributes: ['name', 'email'] },
+          { model: User, as: "User", attributes: ["name", "email"] },
+          { model: User, as: "DelegateUser", attributes: ["name", "email"] },
         ],
       });
 
@@ -59,8 +59,8 @@ class LeaveController {
       const leaves = await Leave.findAll({
         where: { UserId },
         include: [
-          { model: User, as: 'User', attributes: ['name', 'email'] },
-          { model: User, as: 'DelegateUser', attributes: ['name', 'email'] },
+          { model: User, as: "User", attributes: ["name", "email"] },
+          { model: User, as: "DelegateUser", attributes: ["name", "email"] },
         ],
       });
 
