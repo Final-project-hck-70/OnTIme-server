@@ -26,7 +26,7 @@ module.exports = {
         allowNull: false,
       },
       phoneNumber: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.BIGINT,
       },
       avaUrl: {
         type: Sequelize.STRING,
