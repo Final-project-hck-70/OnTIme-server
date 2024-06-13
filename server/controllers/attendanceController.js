@@ -16,7 +16,6 @@ class AttendanceController {
       const startOfDay = new Date(now.setHours(0, 0, 0, 0));
       const endOfDay = new Date(now.setHours(23, 59, 59, 999));
 
-      // Check if user has already clocked in today
       const existingAttendance = await Attendance.findOne({
         where: {
           UserId,
@@ -30,12 +29,35 @@ class AttendanceController {
         return res.status(400).json({ message: "Already clocked in today" });
       }
 
-      const clockInTime = new Date(user.Company.clockInTime);
-      const attendanceStatus = new Date() > clockInTime ? "late" : "on time";
+      const previousAttendance = await Attendance.findOne({
+        where: {
+          UserId,
+          clockOut: null,
+          clockIn: {
+            [Op.lt]: startOfDay,
+          },
+        },
+      });
+
+      if (previousAttendance) {
+        previousAttendance.attendanceStatus = "absent";
+        await previousAttendance.save();
+      }
+
+      const currentTime = new Date();
+      const companyClockInTime = new Date(user.Company.clockInTime);
+      
+      // Normalize the companyClockInTime to the current day
+      companyClockInTime.setFullYear(currentTime.getFullYear());
+      companyClockInTime.setMonth(currentTime.getMonth());
+      companyClockInTime.setDate(currentTime.getDate());
+
+      // Compare time parts ignoring the date
+      const attendanceStatus = currentTime > companyClockInTime ? "late" : "on time";
 
       const attendance = await Attendance.create({
         UserId,
-        clockIn: new Date(),
+        clockIn: currentTime,
         attendanceStatus,
       });
 
@@ -58,7 +80,17 @@ class AttendanceController {
           .json({ message: "Attendance not found or already clocked out" });
       }
 
-      attendance.clockOut = new Date();
+      const clockOutTime = new Date();
+
+      const clockInDate = attendance.clockIn;
+      if (clockOutTime.getDate() !== clockInDate.getDate() || 
+          clockOutTime.getMonth() !== clockInDate.getMonth() || 
+          clockOutTime.getFullYear() !== clockInDate.getFullYear()) {
+        attendance.attendanceStatus = "absent";
+      } else {
+        attendance.clockOut = clockOutTime;
+      }
+
       await attendance.save();
 
       res.status(200).json(attendance);
