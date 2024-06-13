@@ -33,8 +33,11 @@ class UserController {
   static async getAllUsers(req, res, next) {
     try {
       const { name } = req.query;
+      const userCompanyId = req.user.CompanyId;
 
-      const whereConditions = {};
+      const whereConditions = {
+        CompanyId: userCompanyId,
+      };
 
       if (name) {
         whereConditions.name = {
