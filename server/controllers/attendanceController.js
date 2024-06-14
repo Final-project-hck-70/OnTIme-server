@@ -46,14 +46,15 @@ class AttendanceController {
 
       const currentTime = new Date();
       const companyClockInTime = new Date(user.Company.clockInTime);
-      
+
       // Normalize the companyClockInTime to the current day
       companyClockInTime.setFullYear(currentTime.getFullYear());
       companyClockInTime.setMonth(currentTime.getMonth());
       companyClockInTime.setDate(currentTime.getDate());
 
       // Compare time parts ignoring the date
-      const attendanceStatus = currentTime > companyClockInTime ? "late" : "on time";
+      const attendanceStatus =
+        currentTime > companyClockInTime ? "late" : "on time";
 
       const attendance = await Attendance.create({
         UserId,
@@ -83,9 +84,11 @@ class AttendanceController {
       const clockOutTime = new Date();
 
       const clockInDate = attendance.clockIn;
-      if (clockOutTime.getDate() !== clockInDate.getDate() || 
-          clockOutTime.getMonth() !== clockInDate.getMonth() || 
-          clockOutTime.getFullYear() !== clockInDate.getFullYear()) {
+      if (
+        clockOutTime.getDate() !== clockInDate.getDate() ||
+        clockOutTime.getMonth() !== clockInDate.getMonth() ||
+        clockOutTime.getFullYear() !== clockInDate.getFullYear()
+      ) {
         attendance.attendanceStatus = "absent";
       } else {
         attendance.clockOut = clockOutTime;
@@ -101,17 +104,90 @@ class AttendanceController {
 
   static async getAllAttendances(req, res, next) {
     try {
-      const { sort = "asc" } = req.query;
+      const userCompanyId = req.user.CompanyId;
+      const { day, month, year, sort = "desc" } = req.query;
+
+      const whereConditions = {};
+
+      if (year) {
+        const startYear = new Date(`${year}-01-01T00:00:00.000Z`);
+        const endYear = new Date(`${parseInt(year) + 1}-01-01T00:00:00.000Z`);
+        whereConditions.clockIn = {
+          [Op.gte]: startYear,
+          [Op.lt]: endYear,
+        };
+      }
+
+      if (month) {
+        const startMonth = new Date(
+          `${year || new Date().getFullYear()}-${String(month).padStart(
+            2,
+            "0"
+          )}-01T00:00:00.000Z`
+        );
+        const endMonth = new Date(startMonth);
+        endMonth.setMonth(startMonth.getMonth() + 1);
+        whereConditions.clockIn = {
+          [Op.gte]: startMonth,
+          [Op.lt]: endMonth,
+        };
+      }
+
+      if (day) {
+        const startDay = new Date(
+          `${year || new Date().getFullYear()}-${String(month).padStart(
+            2,
+            "0"
+          )}-${String(day).padStart(2, "0")}T00:00:00.000Z`
+        );
+        const endDay = new Date(startDay);
+        endDay.setDate(startDay.getDate() + 1);
+        whereConditions.clockIn = {
+          [Op.gte]: startDay,
+          [Op.lt]: endDay,
+        };
+      }
 
       const attendances = await Attendance.findAll({
-        include: { model: User, attributes: ["name", "email"] },
-        order: [
-          [Sequelize.fn("date_part", "year", Sequelize.col("clockIn")), sort],
-          [Sequelize.fn("date_part", "month", Sequelize.col("clockIn")), sort],
-        ],
+        include: {
+          model: User,
+          attributes: ["name", "email"],
+          where: { CompanyId: userCompanyId },
+        },
+        where: whereConditions,
+        order: [[Sequelize.col("clockIn"), sort]],
       });
 
       res.status(200).json(attendances);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async updateAttendanceStatus(req, res, next) {
+    try {
+      const adminCompanyId = req.user.CompanyId;
+      const attendanceId = req.params.id;
+      const { status } = req.body;
+
+      const attendance = await Attendance.findByPk(attendanceId, {
+        include: {
+          model: User,
+          attributes: ["CompanyId"],
+        },
+      });
+
+      if (!attendance || attendance.User.CompanyId !== adminCompanyId) {
+        return res.status(404).json({
+          message:
+            "Attendance record not found or user not in the same company",
+        });
+      }
+
+      attendance.attendanceStatus = status;
+      await attendance.save();
+
+      res.status(200).json(attendance);
     } catch (error) {
       next(error);
     }
