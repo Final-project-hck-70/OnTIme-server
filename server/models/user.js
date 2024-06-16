@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Company, { foreignKey: "CompanyId" });
       User.hasMany(models.Attendance, { foreignKey: "UserId" });
       User.hasMany(models.Leave, { foreignKey: "UserId" });
-      User.hasMany(models.Leave, { foreignKey: "DelegateUserId" });
       User.hasMany(models.Overtime, { foreignKey: "UserId" });
       User.hasMany(models.NationalHoliday, { foreignKey: "UserId" });
     }
