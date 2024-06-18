@@ -15,12 +15,12 @@ module.exports = {
     await queryInterface.bulkInsert("Companies", [
       {
         id: 1,
-        name: "Tech Innovators Inc.",
+        name: "Hacktiv8 Inc.",
         totalLeaves: 12,
         clockInTime: "2024-06-11T08:00:00.000Z",
         clockOutTime: "2024-06-11T17:00:00.000Z",
-        latitude: -6.2,
-        longitude: 106.816666,
+        latitude: -6.260655842906822,
+        longitude: 106.78172469623566,
         createdAt: "2024-01-01T09:00:00.000Z",
         updatedAt: "2024-06-01T10:00:00.000Z",
       },
