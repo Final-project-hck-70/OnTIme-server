@@ -77,6 +77,7 @@ class UserController {
   static async getLoggedInUser(req, res, next) {
     try {
       const { id } = req.user;
+      // console.log(req.user);
 
       const user = await User.findByPk(id, {
         include: [
@@ -100,7 +101,7 @@ class UserController {
           },
         ],
       });
-
+      // console.log(user);
       res.json(user);
     } catch (error) {
       console.error("Error fetching logged-in user:", error);

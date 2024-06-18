@@ -16,6 +16,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       totalLeaves: DataTypes.INTEGER,
+      longitude: DataTypes.STRING,
+      latitude: DataTypes.STRING,
       clockInTime: DataTypes.DATE,
       clockOutTime: DataTypes.DATE,
     },
