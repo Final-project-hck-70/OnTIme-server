@@ -1,0 +1,176 @@
+{
+  "Companies": [
+    {
+      "id": 1,
+      "name": "Tech Innovators Inc.",
+      "totalLeaves": 12,
+      "clockInTime": "2024-06-11T08:00:00.000Z",
+      "clockOutTime": "2024-06-11T17:00:00.000Z",
+      "latitude": -6.200000,
+      "longitude": 106.816666,
+      "createdAt": "2024-01-01T09:00:00.000Z",
+      "updatedAt": "2024-06-01T10:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Creative Solutions LLC",
+      "totalLeaves": 10,
+      "clockInTime": "2024-06-11T09:00:00.000Z",
+      "clockOutTime": "2024-06-11T18:00:00.000Z",
+      "latitude": -6.914744,
+      "longitude": 107.609810
+      ,
+      "createdAt": "2024-02-01T08:00:00.000Z",
+      "updatedAt": "2024-06-02T09:00:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Global Enterprises Corp.",
+      "totalLeaves": 15,
+      "clockInTime": "2024-06-11T07:30:00.000Z",
+      "clockOutTime": "2024-06-11T16:30:00.000Z",
+        "latitude": -7.797068,
+        "longitude": 110.370529,
+      "createdAt": "2024-03-01T07:30:00.000Z",
+      "updatedAt": "2024-06-03T08:30:00.000Z"
+    }
+  ],
+  "Users": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "role": "Admin",
+      "email": "alice.johnson@mail.com",
+      "password": "Admin",
+      "phoneNumber": 1234567890,
+      "avaUrl": "https://www.wisconline.co.uk/images/webp/A37-min.webp",
+      "position": "Head Department",
+      "CompanyId": 1,
+      "createdAt": "2024-03-01T10:00:00.000Z",
+      "updatedAt": "2024-06-05T11:00:00.000Z"
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "role": "Designer",
+      "email": "bob.smith@mail.com",
+      "password": "123456",
+      "phoneNumber": 2345678901,
+      "avaUrl": "https://static01.nyt.com/images/2018/01/27/arts/27bobsmith1/26bobsmith-obit1-superJumbo.jpg",
+      "position": "Graphic Designer",
+      "CompanyId": 1,
+      "createdAt": "2024-04-01T10:30:00.000Z",
+      "updatedAt": "2024-06-06T11:30:00.000Z"
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "role": "Developer",
+      "email": "charlie.brown@mail.com",
+      "password": "654321",
+      "phoneNumber": 3456789012,
+      "avaUrl": "https://example.com/charlie.jpg",
+      "position": "Software Engineer",
+      "CompanyId": 2,
+      "createdAt": "2024-05-01T11:00:00.000Z",
+      "updatedAt": "2024-06-07T12:00:00.000Z"
+    },
+    {
+      "id": 4,
+      "name": "Diana Prince",
+      "role": "Marketer",
+      "email": "diana.prince@mail.com",
+      "password": "wonderwoman",
+      "phoneNumber": 4567890123,
+      "avaUrl": "https://example.com/diana.jpg",
+      "position": "Marketing Manager",
+      "CompanyId": 2,
+      "createdAt": "2024-05-15T12:00:00.000Z",
+      "updatedAt": "2024-06-08T13:00:00.000Z"
+    },
+    {
+      "id": 5,
+      "name": "Edward Nigma",
+      "role": "Analyst",
+      "email": "edward.nigma@mail.com",
+      "password": "riddle123",
+      "phoneNumber": 5678901234,
+      "avaUrl": "https://example.com/edward.jpg",
+      "position": "Data Analyst",
+      "CompanyId": 3,
+      "createdAt": "2024-06-01T09:00:00.000Z",
+      "updatedAt": "2024-06-09T10:00:00.000Z"
+    },
+    {
+      "id": 6,
+      "name": "Fiona Gallagher",
+      "role": "Support",
+      "email": "fiona.gallagher@mail.com",
+      "password": "support123",
+      "phoneNumber": 6789012345,
+      "avaUrl": "https://example.com/fiona.jpg",
+      "position": "Customer Support",
+      "CompanyId": 3,
+      "createdAt": "2024-06-02T09:30:00.000Z",
+      "updatedAt": "2024-06-10T10:30:00.000Z"
+    }
+  ],
+  "PublicHoliday": [
+    {
+      "date": "2024-01-01",
+      "holidayName": "Tahun Baru 2024 (New Year's Day)"
+    },
+    {
+      "date": "2024-01-27",
+      "holidayName": "Imlek 2575 (Chinese New Year)"
+    },
+    {
+      "date": "2024-03-22",
+      "holidayName": "Isra Mikraj Nabi Muhammad SAW (Ascension of Prophet Muhammad)"
+    },
+    {
+      "date": "2024-04-08",
+      "holidayName": "Paskah (Easter)"
+    },
+    {
+      "date": "2024-04-18",
+      "holidayName": "Wafat Ismail Marzuki (Ismail Marzuki's Death Anniversary)"
+    },
+    {
+      "date": "2024-05-01",
+      "holidayName": "Hari Buruh (Labor Day)"
+    },
+    {
+      "date": "2024-05-13",
+      "holidayName": "Kenaikan Isa Al Masih (Ascension of Jesus Christ)"
+    },
+    {
+      "date": "2024-05-17",
+      "holidayName": "Waisak 2568 (Vesak)"
+    },
+    {
+      "date": "2024-06-01",
+      "holidayName": "Hari Lahir Pancasila (Pancasila Day)"
+    },
+    {
+      "date": "2024-08-17",
+      "holidayName": "Hari Kemerdekaan RI (Indonesian Independence Day)"
+    },
+    {
+      "date": "2024-09-10",
+      "holidayName": "Tahun Baru Islam 1446 H (Islamic New Year)"
+    },
+    {
+      "date": "2024-09-27",
+      "holidayName": "Idul Adha 1445 H (Feast of the Sacrifice)"
+    },
+    {
+      "date": "2024-10-25",
+      "holidayName": "Maulid Nabi Muhammad SAW (Prophet Muhammad's Birthday)"
+    },
+    {
+      "date": "2024-12-25",
+      "holidayName": "Hari Natal (Christmas)"
+    }
+  ]
+}

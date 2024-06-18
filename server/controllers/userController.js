@@ -80,10 +80,14 @@ class UserController {
   static async getLoggedInUser(req, res, next) {
     try {
       const { id } = req.user;
+      // console.log(req.user);
 
       const user = await User.findByPk(id, {
         include: [
-          { model: Company, attributes: ["name"] },
+          {
+            model: Company,
+            attributes: { exclude: ["createdAt", "updatedAt"] },
+          },
           { model: Attendance },
           { model: Overtime },
           {
@@ -96,17 +100,15 @@ class UserController {
                 attributes: ["name", "email"],
               },
             ],
+            where: { UserId: id },
           },
         ],
       });
-
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      res.status(200).json(user);
+      // console.log(user);
+      res.json(user);
     } catch (error) {
-      next(error);
+      console.error("Error fetching logged-in user:", error);
+      res.status(500).json({ message: "Failed to fetch logged-in user" });
     }
   }
 }
