@@ -88,11 +88,18 @@ class UserController {
             model: Company,
             attributes: { exclude: ["createdAt", "updatedAt"] },
           },
-          { model: Attendance },
-          { model: Overtime },
+          {
+            model: Attendance,
+            required: false,
+          },
+          {
+            model: Overtime,
+            required: false,
+          },
           {
             model: Leave,
             as: "Leaves",
+            required: false,
             include: [
               {
                 model: User,
@@ -100,11 +107,16 @@ class UserController {
                 attributes: ["name", "email"],
               },
             ],
-            where: { UserId: id },
           },
         ],
       });
-      console.log(user, "<<<<<");
+
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+
       res.json(user);
     } catch (error) {
       console.error("Error fetching logged-in user:", error);
