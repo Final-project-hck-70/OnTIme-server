@@ -104,7 +104,7 @@ class UserController {
           },
         ],
       });
-      // console.log(user);
+      console.log(user, "<<<<<");
       res.json(user);
     } catch (error) {
       console.error("Error fetching logged-in user:", error);
