@@ -3,7 +3,7 @@
     "username": "postgres",
     "password": "postgres",
     "database": "final-project",
-    "host": "127.0.0.1",
+    "host": "",
     "dialect": "postgres"
   },
   "test": {
@@ -14,10 +14,6 @@
     "dialect": "postgres"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "use_env_variable": "SUPABASE_URI"
   }
 }
