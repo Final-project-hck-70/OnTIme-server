@@ -40,7 +40,7 @@ class AttendanceController {
       });
 
       if (previousAttendance) {
-        previousAttendance.attendanceStatus = "absent";
+        previousAttendance.attendanceStatus = "Absent";
         await previousAttendance.save();
       }
 
@@ -54,7 +54,7 @@ class AttendanceController {
 
       // Compare time parts ignoring the date
       const attendanceStatus =
-        currentTime > companyClockInTime ? "late" : "on time";
+        currentTime > companyClockInTime ? "Late" : "Present";
 
       const attendance = await Attendance.create({
         UserId,
@@ -89,7 +89,7 @@ class AttendanceController {
         clockOutTime.getMonth() !== clockInDate.getMonth() ||
         clockOutTime.getFullYear() !== clockInDate.getFullYear()
       ) {
-        attendance.attendanceStatus = "absent";
+        attendance.attendanceStatus = "Absent";
       } else {
         attendance.clockOut = clockOutTime;
       }
