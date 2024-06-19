@@ -17,7 +17,7 @@ module.exports = {
         id: 1,
         name: "Hacktiv8 Inc.",
         totalLeaves: 12,
-        clockInTime: "2024-06-11T08:00:00.000Z",
+        clockInTime: "2024-06-11T09:00:00.000Z",
         clockOutTime: "2024-06-11T17:00:00.000Z",
         latitude: -6.260655842906822,
         longitude: 106.78172469623566,
