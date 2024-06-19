@@ -11,6 +11,9 @@ function errorHandler(err, req, res, next) {
     case "PasswordEmpty":
       res.status(400).json({ message: "Password required" });
       return;
+    case "forbidden":
+      res.status(403).json({ message: "Admin only" });
+      return;
     case "InvalidLogin":
       res.status(401).json({ message: "Email/Password Invalid" });
       return;
