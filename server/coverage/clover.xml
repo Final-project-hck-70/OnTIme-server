@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1718792863438" clover="3.2.0">
-  <project timestamp="1718792863438" name="All files">
-    <metrics statements="348" coveredstatements="303" conditionals="80" coveredconditionals="48" methods="41" coveredmethods="41" elements="469" coveredelements="392" complexity="0" loc="348" ncloc="348" packages="6" files="22" classes="22"/>
+<coverage generated="1718793495768" clover="3.2.0">
+  <project timestamp="1718793495768" name="All files">
+    <metrics statements="352" coveredstatements="303" conditionals="82" coveredconditionals="48" methods="41" coveredmethods="41" elements="475" coveredelements="392" complexity="0" loc="352" ncloc="352" packages="6" files="22" classes="22"/>
     <package name="server">
       <metrics statements="10" coveredstatements="10" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
       <file name="app.js" path="C:\Users\reyha\hacktiv8\OnTIme-server\server\app.js">
@@ -237,7 +237,7 @@
       </file>
     </package>
     <package name="server.middleware">
-      <metrics statements="32" coveredstatements="30" conditionals="14" coveredconditionals="11" methods="3" coveredmethods="3"/>
+      <metrics statements="36" coveredstatements="30" conditionals="16" coveredconditionals="11" methods="3" coveredmethods="3"/>
       <file name="authentication.js" path="C:\Users\reyha\hacktiv8\OnTIme-server\server\middleware\authentication.js">
         <metrics statements="16" coveredstatements="15" conditionals="6" coveredconditionals="4" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
@@ -267,17 +267,21 @@
         <line num="11" count="2" type="stmt"/>
       </file>
       <file name="errorhandler.js" path="C:\Users\reyha\hacktiv8\OnTIme-server\server\middleware\errorhandler.js">
-        <metrics statements="10" coveredstatements="10" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
+        <metrics statements="14" coveredstatements="10" conditionals="8" coveredconditionals="6" methods="1" coveredmethods="1"/>
         <line num="2" count="5" type="stmt"/>
-        <line num="3" count="5" type="cond" truecount="6" falsecount="0"/>
+        <line num="3" count="5" type="cond" truecount="6" falsecount="2"/>
         <line num="6" count="1" type="stmt"/>
         <line num="7" count="1" type="stmt"/>
-        <line num="9" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="13" count="2" type="stmt"/>
-        <line num="16" count="3" type="stmt"/>
-        <line num="17" count="1" type="stmt"/>
-        <line num="21" count="2" type="stmt"/>
+        <line num="9" count="0" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="12" count="0" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="27" count="2" type="stmt"/>
       </file>
     </package>
     <package name="server.models">
